@@ -176,7 +176,6 @@ Når du bearbejder dine data, så vær opmærksom på hvad der sker med dine usi
 #Ekstra: En mere matematisk beskrivelse
 
 """
-
 Vi lader positionspunkterne y være fordelt ved y ~ N(mu,sigma^2).
 
 For at beregne en vilkårlig hastighed v ser vi v = (y2 - y1)/dt + N(0,2*sigma^2)/dt
