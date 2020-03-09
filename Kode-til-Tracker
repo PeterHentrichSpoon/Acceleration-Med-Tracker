@@ -60,7 +60,7 @@ def avg_interv(data):
 
 ### Læs data ###
 
-data = np.loadtxt('Falcon.txt', dtype=str, skiprows=2)
+data = np.loadtxt('Tracker data 2.txt', dtype=str, skiprows=2)
 
 data = convertdata(data)
 
@@ -131,3 +131,56 @@ plt.title('Acceleration per tid')
 
 plt.legend()
 plt.show()
+
+### Diskussion ###
+
+# Hvad sker der med vores datapunkter når vi beregner hastighed og acceleration som funktion af tid?
+
+"""
+Vi forøger den naturlige støj associeret med vores målinger.
+
+For to efterfølgende positioner y1 og y2, har vi tilhørende støj E1 og E2.
+E1 og E2 repræsenterer altså usikkerheden ved hver måling.
+
+Når vi finder forskellen y2 - y1, finder vi i virkeligheden forskellen y2 + E2 - y1 - E1.
+
+Når vi så beregner v = (y2 - y1)/dt, får vi i virkeligheden v = (y2 - y1)/dt + (E2 - E1)/dt
+
+Vi har altså endnu mere usikkerhed på vores hastigheder; vi har både E2 og E1.
+
+Desuden er dt lille, hvilket yderligere forstørre støjen.
+
+Disse ting medfører at usikkerheden på vores hastigheder bliver større.
+"""
+
+#Hvad kunne vi gøre for at få bedre datapunkter for hastighed og acceleration?
+
+"""
+I stedet for at beregne hastigheder baseret på 2 punkter, kunne vi beregne vores hastigheder
+baseret på flere punkter og over et større tidsinterval.
+
+Usikkerhederne for punkterne har større chance for at udligne hinanden jo flere punkter vi medtager,
+og desto større vores tidsinterval desto mindre usikkerhed på vores hastigheder.
+
+At gøre alt det ville dog ikke medføre bedre data end hvad vi ville få ud af at fitte
+et 2. grads polynomium til vores originale datasæt; fittet i sig selv er jo kontinuerligt
+og kan differentieres uden problemer, i modsætning til vores datapunker der er diskontinuerte.
+"""
+
+#Hvad er moralen/lektien ved vores øvelse?
+
+""" 
+Når du bearbejder dine data, så vær opmærksom på hvad der sker med dine usikkerheder!
+"""
+
+#Ekstra: En mere matematisk beskrivelse
+
+"""
+
+Vi lader positionspunkterne y være fordelt ved y ~ N(mu,sigma^2).
+
+For at beregne en vilkårlig hastighed v ser vi v = (y2 - y1)/dt + N(0,2*sigma^2)/dt
+
+Bid mærke i at varianserne adderes, hvilket forøger støjen.
+Bid desuden mærke i at et lille dt medfører endnu større støj.
+"""
